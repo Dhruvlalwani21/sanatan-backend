@@ -18,12 +18,12 @@ router.get('/',async (req,res)=> {
 router.post("/add",async (req,res)=>{
     try {
         var date=  moment().toString();
-        const {status,category,subcategory,cardstyle,pagestyle,Cardcolor,cshadow,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,title,description} =req.body;
+        const {status,category,Publish,subcategory,cardstyle,pagestyle,Cardcolor,cshadow,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,title,description} =req.body;
         const  addExtra= await Extrapg.create({
             Status:status,
             Category: category,
             Subcat: subcategory,
-            Publish:date,
+            Publish:Publish,
             Cardstyle:cardstyle,
             Pagestyle:"extrapages",
             Cardcolor:Cardcolor,

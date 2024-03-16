@@ -23,7 +23,6 @@ router.post("/add",async (req,res)=>{
             Category: category,
             Subcat: subcategory,
             Publish:Publish,
-
             Cardstyle:cardstyle,
             Pagestyle:"scriptures",
             Cardcolor:Cardcolor,
@@ -72,7 +71,7 @@ router.get('/:id',async(req,res)=> {
 
 router.put("/:id",async(req,res)=>{
     const { 
-        Status,Category,Subcat,Pagestyle,Cardcolor,Cardstyle,Cardshadow,Shadowcolor,Shadowx,Shadowy,Shadowx1,Shadowy1,CBlur,Spread,Img,Title,Description,InnerT,InnerD,InnerImg,IncludeInfo,Availablity,Pdf,Chapters,
+        Status,Category,Subcat,Publish,Pagestyle,Cardcolor,Cardstyle,Cardshadow,Shadowcolor,Shadowx,Shadowy,Shadowx1,Shadowy1,CBlur,Spread,Img,Title,Description,InnerT,InnerD,InnerImg,IncludeInfo,Availablity,Pdf,Chapters,
     } = req.body;
     const _id =req.params.id;
   try {

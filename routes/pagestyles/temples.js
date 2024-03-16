@@ -17,15 +17,15 @@ router.get('/',async (req,res)=> {
 router.post("/add" ,async (req,res)=>{
     try {
     const {
-        category,Publish,subcategory,pagestyle,publish,status,cardstyle,Cardcolor,Cardshadow,shadowcolor,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,Image,InnerImg,title,description,InnerT,InnerD,Gallery,Sociallinks,Timmings,location,lat,long,street,postcode,country,city,state,air,airlabel,road,roadlabel,train,trainlabel,audio,video,docs
+        category,Publish,subcategory,pagestyle,status,cardstyle,Cardcolor,Cardshadow,shadowcolor,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,Image,InnerImg,title,description,InnerT,InnerD,Gallery,Sociallinks,Timmings,location,lat,long,street,postcode,country,city,state,air,airlabel,road,roadlabel,train,trainlabel,audio,video,docs
     } = req.body;
     var date=  moment().toString();
         const addtemple = Temple.create({
             Category:category,
             Subcat:subcategory,
             Status:status,
-            Publish:date,
-            Pagestyle:"Temple",
+            Publish:Publish,
+            Pagestyle:"temples",
             Cardcolor:Cardcolor,
             Cardstyle:cardstyle,
             Cardshadow:Cardshadow,

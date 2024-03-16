@@ -32,13 +32,12 @@ try{
 }
 router.post("/add",async(req,res)=>{
     try {
-        var date=  moment().toString();
-        const {category,subcategory,pagestyle,cardstyle,status,Cardcolor,cardshadow,shadowcolor,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,image,title,description,innert,mtitle,InnerD,minfo,docs,audio,video
+        const {category,subcategory,Publish,pagestyle,cardstyle,status,Cardcolor,cardshadow,shadowcolor,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,image,title,description,innert,mtitle,InnerD,minfo,docs,audio,video
         }= req.body;
         const addaarti = Aarti.create({
             Category:category,
             Subcat:subcategory,
-            Publish:date,
+            Publish:Publish,
             Status:status,
             Pagestyle:"aarti",
             Cardstyle:cardstyle,
@@ -73,7 +72,7 @@ router.post("/add",async(req,res)=>{
 
 router.put("/:id",async(req,res)=>{
     const { 
-        Category,Subcat,Status,Cardstyle,Pagestyle,Cardcolor,Cardshadow,Shadowx,Shadowy,Shadowx1,Shadowy1,Shadowcolor,CBlur,Spread,Title,Description,Image,InnerD,MiddleT,MiddleD,Documents,Audio,Video,} = req.body;
+        Category,Subcat,Publish,Status,Cardstyle,Pagestyle,Cardcolor,Cardshadow,Shadowx,Shadowy,Shadowx1,Shadowy1,Shadowcolor,CBlur,Spread,Title,Description,Image,InnerD,MiddleT,MiddleD,Documents,Audio,Video,} = req.body;
     const _id = req.params.id;
    try {
      const UpdateAarti = await  Aarti.findByIdAndUpdate(_id,{ 

@@ -4,6 +4,7 @@ const Temple = require('../../models/pages/temples');
 const Aarti = require('../../models/pages/aarti');
 const Extrapg = require('../../models/pages/extra');
 const Scriptures = require('../../models/pages/scriptures');
+const Pageblog = require('../../models/pageblog');
 
 
 router.get('/',async (req,res)=> {
@@ -13,8 +14,10 @@ router.get('/',async (req,res)=> {
         const Temples = await Temple.find();
         const Aartis = await Aarti.find();
         const Extrapgs = await Extrapg.find();
-        let  data = [...Scripture,...Temples,...Aartis,...Extrapgs];
-        data.sort((Scripture,Temples,Aartis,Extrapgs)=>Scripture-Temples-Aartis-Extrapgs);
+        const Pageblogs = await Pageblog.find();
+
+        let  data = [...Scripture,...Temples,...Aartis,...Extrapgs,...Pageblogs];
+        data.sort((Scripture,Temples,Aartis,Extrapgs,pageblogs)=>Scripture-Temples-Aartis-Extrapgs-Pageblogs);
         // for (i=0;i<Scripture.length;i++){
         //     data[i]=Scripture[i];
         // }
