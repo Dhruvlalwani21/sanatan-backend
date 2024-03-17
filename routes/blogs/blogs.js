@@ -17,59 +17,17 @@ router.get('/',async (req,res)=> {
 router.post("/add",async (req,res)=>{
     try {
         var date=  moment().toString();
-        const {Status,Category,Subcategory,Pagestyle,Cardcolor,Shadowcolor,Shadowx,Shadowy,Shadowx1,Shadowy1,CBlur,Spread,Image,Banner,Title,Description,Gallery} =req.body;
-        const  addExtra= await Blogs.create({
-            Status:Status,
-            Category: Category,
-            Subcat: Subcategory,
-            Publish:date,
-            Pagestyle:Pagestyle,
-            Cardcolor:Cardcolor,
-            Shadowcolor:Shadowcolor,
-            Shadowx:Shadowx,
-            Shadowy:Shadowy,
-            Shadowx1:Shadowx1,
-            Shadowy1:Shadowy1,
-            CBlur: CBlur,
-            Spread:Spread,
-            Image:Image,
-            Banner:Banner,
-            Title:Title,
-            Description:Description,
-            Gallery:Gallery
-        })
+        const  addExtra= await Blogs.create(req.body)
         res.status(200).json({msg:"Successfully Added"});
-     
     } catch (error) {
         res.status(500).json({message:error.message});
     }
 })
 
-
 router.put("/:id",async(req,res)=>{
-    const { 
-        Status,Category,Subcategory,Pagestyle,Cardcolor,Shadowcolor,Shadowx,Shadowy,Shadowx1,Shadowy1,CBlur,Spread,Image,Banner,Title,Description,Gallery} = req.body;
     const _id = req.params.id
  try {
-        const BlogsUpdate = await Blogs.findByIdAndUpdate(_id,{
-            Status:Status,
-            Category: Category,
-            Subcat: Subcategory,
-            Pagestyle:Pagestyle,
-            Cardcolor:Cardcolor,
-            Shadowcolor:Shadowcolor,
-            Shadowx:Shadowx,
-            Shadowy:Shadowy,
-            Shadowx1:Shadowx1,
-            Shadowy1:Shadowy1,
-            CBlur: CBlur,
-            Spread:Spread,
-            Image:Image,
-            Banner:Banner,
-            Title:Title,
-            Description:Description,
-            Gallery:Gallery
-        })
+        const BlogsUpdate = await Blogs.findByIdAndUpdate(_id,req.body)
         res.status(200).json({msg:"Successfully Updated"});
  } catch (error) {
     res.status(500).json({message:error.message});

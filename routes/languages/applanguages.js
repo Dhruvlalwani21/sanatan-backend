@@ -15,13 +15,7 @@ router.get('/',async (req,res)=> {
 router.post("/add" ,async (req,res)=>{
     try {
         var date=  moment().toString();
-        const {status,name,icon} = req.body
-        const addlanguage = AppLanguages.create({
-            Status: status,
-            Name:name,
-            Icon:icon,
-            Date:date
-        });
+        const addlanguage = AppLanguages.create(req.body);
         res.status(200).json({msg:'Successfully Added'})
 
     } catch (error) {
@@ -44,12 +38,8 @@ router.put("/:id",async(req,res)=>{
         Name,Status,Icon} = req.body;
     const _id = req.params.id;
        try {
-         const UpdateLanguage = await AppLanguages.findByIdAndUpdate(_id,{
-         Name:Name,
-         Status:Status,
-         Icon: Icon,
-     })
-     res.status(200).json("success")
+         const UpdateLanguage = await AppLanguages.findByIdAndUpdate(_id,req.body);
+         res.status(200).json("success");
        } catch (error) {
         res.status(500).json({message:error.message})
        }

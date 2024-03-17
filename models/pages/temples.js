@@ -4,26 +4,28 @@ const {Schema} = mongoose;
 
 const TempleSchema = new Schema({
 
-    Status:{
-        type:Number,
-    },
     Category:{
         type:String
     },
-    Subcat:{
+    Subcategory:{
         type:String
-    },
-    Publish:{
-        type:Date,
-        default: Date.now
     },
     Pagestyle:{
         type:String
     },
-    Cardcolor:{
+    Cardstyle:{
         type:String
     },
-    Cardshadow:{
+    Status:{
+        type:Number,
+    },
+    Publish:{
+        type:Date,
+    },
+    CardColor:{
+        type:String
+    },
+    CardShadow:{
         type:String
     },
     Shadowx:{
@@ -38,10 +40,10 @@ const TempleSchema = new Schema({
     Shadowy1:{
         type:String
     },
-    Shadowcolor:{
+    ShadowColor:{
         type:String
     },
-    CBlur:{
+    Blur:{
         type:String
     },
     Spread:{
@@ -59,13 +61,13 @@ const TempleSchema = new Schema({
     Image:{
         type:String
     },
-    InnerT:{
+    InnerTitle:{
         type:String
     },
     InnerImg:{
         type:String
     },
-    InnerD:{
+    InnerDescription:{
         type :String
     },
     Gallery:{

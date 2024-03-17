@@ -18,25 +18,7 @@ router.get('/',async (req,res)=> {
 router.post("/add",async (req,res)=>{
     try {
         var date=  moment().toString();
-        const {status,category,Publish,subcategory,cardstyle,pagestyle,Cardcolor,cshadow,shadowx,shadowy,shadowx1,shadowy1,cblur,spread,title,description} =req.body;
-        const  addExtra= await Extrapg.create({
-            Status:status,
-            Category: category,
-            Subcat: subcategory,
-            Publish:Publish,
-            Cardstyle:cardstyle,
-            Pagestyle:"extrapages",
-            Cardcolor:Cardcolor,
-            Shadowcolor:cshadow,
-            Shadowx:shadowx,
-            Shadowy:shadowy,
-            Shadowx1:shadowx1,
-            Shadowy1:shadowy1,
-            CBlur: cblur,
-            Spread:spread,
-            Title:title,
-            Description:description
-        })
+        const  addExtra= await Extrapg.create(req.body);
         res.status(200).json({msg:"Successfully Added"});
      
     } catch (error) {
@@ -46,29 +28,9 @@ router.post("/add",async (req,res)=>{
 
 
 router.put("/:id",async(req,res)=>{
-    const { 
-        Status,Category,Subcat,Publish,Pagestyle,Cardstyle,Cardcolor,Shadowcolor,Shadowx,Shadowy,Shadowx1,Shadowy1,CBlur,Spread,Title,Description
-     } = req.body;
     const _id = req.params.id
  try {
-        const ExtrapgUpdate = await Extrapg.findByIdAndUpdate(_id,{
-           Status:Status,
-           Category:Category,
-           Subcat:Subcat,
-           Publish:Publish,
-           Cardstyle:Cardstyle,
-           Pagestyle:"extrapages",
-           Cardcolor:Cardcolor,
-           Shadowcolor:Shadowcolor,
-           Shadowx:Shadowx,
-           Shadowy:Shadowy,
-           Shadowx1:Shadowx1,
-           Shadowy1:Shadowy1,
-           CBlur:CBlur,
-           Spread:Spread,
-           Title:Title,
-           Description:Description
-        })
+        const ExtrapgUpdate = await Extrapg.findByIdAndUpdate(_id,req.body);
         res.status(200).json({msg:"Successfully Updated"});
  } catch (error) {
     res.status(500).json({message:error.message});

@@ -4,26 +4,28 @@ const {Schema} = mongoose;
 
 const ScripturesSchema = new Schema({
 
-    Status:{
-        type:String
-    },
     Category:{
-        type:String,
-        default:"scriptures"
-    },
-    Subcat:{
         type:String
     },
-    Publish:{
-        type:Date,
+    Subcategory:{
+        type:String
     },
     Pagestyle:{
         type:String
     },
-    Cardcolor:{
+    Cardstyle:{
         type:String
     },
-    Cardshadow:{
+    Status:{
+        type:Number,
+    },
+    Publish:{
+        type:Date,
+    },
+    CardColor:{
+        type:String
+    },
+    CardShadow:{
         type:String
     },
     Shadowx:{
@@ -38,10 +40,10 @@ const ScripturesSchema = new Schema({
     Shadowy1:{
         type:String
     },
-    Shadowcolor:{
+    ShadowColor:{
         type:String
     },
-    CBlur:{
+    Blur:{
         type:String
     },
     Spread:{
@@ -56,10 +58,10 @@ const ScripturesSchema = new Schema({
     Img:{
         type:String
     },
-    InnerT:{
+    InnerTitle:{
         type:String
     },
-    InnerD:{
+    InnerDescription:{
         type:String
     },
     InnerImg:{

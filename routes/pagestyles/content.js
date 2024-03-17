@@ -15,21 +15,7 @@ router.get('/',async (req,res)=> {
 router.post("/add/:lang/:id",async (req,res)=>{
     try {
         const {lang,id} = req.params;
-        const {Chapters,Audio,Audioop,Text,Textop,Pdfop,Pdf,PdfFile,Video,Videoop} =req.body;
-        const  addContent= await Content.create({
-            Language:lang,
-            ScriptureId:id,
-            Chapters:Chapters,
-            Video:Video,
-            Videoop:Videoop,
-            Audio:Audio,
-            Audioop:Audioop,
-            Text:Text,
-            Textop:Textop,
-            Pdf:Pdf,
-            Pdfop:Pdfop,
-            PdfFile:PdfFile
-        })
+        const  addContent= await Content.create(req.body);
         res.status(200).json({msg:"Successfully Added"});
      
     } catch (error) {
@@ -40,20 +26,8 @@ router.post("/add/:lang/:id",async (req,res)=>{
 
 router.put("/:id",async(req,res)=>{
     const _id = req.params.id
-    const {Chapters,Audio,Audioop,Text,Textop,Pdfop,Pdf,PdfFile,Video,Videoop} =req.body;
  try {
-        const ContentUpdate = await Content.findByIdAndUpdate(_id,{
-            Chapters:Chapters,
-            Video:Video,
-            Videoop:Videoop,
-            Audio:Audio,
-            Audioop:Audioop,
-            Text:Text,
-            Textop:Textop,
-            Pdf:Pdf,
-            Pdfop:Pdfop,
-            PdfFile:PdfFile
-        })
+        const ContentUpdate = await Content.findByIdAndUpdate(_id,req.body);
         res.status(200).json({msg:"Successfully Updated"});
  } catch (error) {
     res.status(500).json({message:error.message});

@@ -16,38 +16,17 @@ router.get('/',async (req,res)=> {
 
 router.post('/add',async (req,res)=> {
     try{
-        const {name,status,CategoryIn,caticon,bannercolor,fontcolor,leftcolor,rightcolor} = req.body;
-        const cat = await Maincat.create({
-            CategoryIn:CategoryIn,
-            Name:name,
-            Status:status,
-            Icon:caticon,
-            Bannercolor:bannercolor,
-            Headfontcolor:fontcolor,
-            Colorleft:leftcolor,
-            Colorright:rightcolor
-        })
-        const savecat = cat.save()
-        res.status(200).json(savecat);
+       const cat = await Maincat.create(req.body);
+        res.status(200).json(cat);
     }catch(error){
-        res.status(500).json({message:error.message})
+        res.status(500).json({message:error.message});
     }
 });
 
 router.put('/:id',async (req,res)=> {
     try{
-        const {Name,CategoryIn,Status,Icon,Bannercolor,Headfontcolor,Colorleft,Colorright} = req.body;
-        const _id = req.params.id
-        const cat = await Maincat.findByIdAndUpdate(_id,{
-            Name:Name,
-            CategoryIn:CategoryIn,
-            Status:Status,
-            Icon:Icon,
-            Bannercolor:Bannercolor,
-            Headfontcolor:Headfontcolor,
-            Colorleft:Colorleft,
-            Colorright:Colorright
-        })
+           const _id = req.params.id
+        const cat = await Maincat.findByIdAndUpdate(_id,req.body);
         res.status(200).json("Success");
     }catch(error){
         res.status(500).json({message:error.message})
@@ -65,7 +44,7 @@ async function getcat(req,res,next){
       res.maincategory = maincategory;
       res.json(res.maincategory);
     }catch(error){
-        return res.status(500).json({message:error.message})
+        return res.status(500).json({message:error.message});
     }
 };
 

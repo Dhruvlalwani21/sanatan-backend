@@ -3,26 +3,28 @@ const {Schema} = mongoose;
 
 
 const AartiSchema = new Schema({
-
-    Status:{
-        type:String
-    },
     Category:{
         type:String
     },
-    Subcat:{
+    Subcategory:{
         type:String
-    },
-    Publish:{
-        type:Date,
     },
     Pagestyle:{
         type:String
     },
-    Cardcolor:{
+    Cardstyle:{
         type:String
     },
-    Cardshadow:{
+    Status:{
+        type:Number,
+    },
+    Publish:{
+        type:Date,
+    },
+    CardColor:{
+        type:String
+    },
+    CardShadow:{
         type:String
     },
     Shadowx:{
@@ -31,10 +33,16 @@ const AartiSchema = new Schema({
     Shadowy:{
         type:String
     },
-    Shadowcolor:{
+    Shadowx1:{
         type:String
     },
-    CBlur:{
+    Shadowy1:{
+        type:String
+    },
+    ShadowColor:{
+        type:String
+    },
+    Blur:{
         type:String
     },
     Spread:{
@@ -49,13 +57,16 @@ const AartiSchema = new Schema({
     Image:{
         type:String
     },
-    InnerD:{
+    InnerTitle:{
         type:String
     },
-    MiddleT:{
+    InnerDescription:{
         type:String
     },
-    MiddleD:{
+    MiddleTitle:{
+        type:String
+    },
+    MiddleDescription:{
         type:String
     },
     Documents:{

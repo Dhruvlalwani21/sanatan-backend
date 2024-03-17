@@ -27,19 +27,8 @@ router.get('/find/:main',async (req,res)=> {
 
 router.post('/add',async (req,res)=> {
     try{
-        const {parent,name,status,caticon,bannercolor,fontcolor,leftcolor,rightcolor} = req.body;
-        const cat = await Category.create({
-            Parent:parent,
-            Name:name,
-            Status:status,
-            Icon:caticon,
-            Bannercolor:bannercolor,
-            Headfontcolor:fontcolor,
-            Colorleft:leftcolor,
-            Colorright:rightcolor
-        })
-        const savecat = cat.save()
-        res.status(200).json(savecat);
+         const cat = await Category.create(req.body)
+        res.status(200).json(cat);
     }catch(error){
         res.status(500).json({message:error.message})
     }
@@ -51,17 +40,8 @@ router.put("/:id",async(req,res)=>{
         Parent,Name,Status,Icon,Bannercolor,Headfontcolor,Colorleft,Colorright,} = req.body;
     const _id = req.params.id
        try {
-         const UpdateCategory = await Category.findByIdAndUpdate(_id,{
-         Parent:Parent,
-         Name:Name,
-         Status:Status,
-         Icon: Icon,
-         Bannercolor:Bannercolor,
-         Headfontcolor:Headfontcolor,
-         Colorleft:Colorleft,
-         Colorright:Colorright,
-     })
-     res.status(200).json("success")
+         const UpdateCategory = await Category.findByIdAndUpdate(_id,req.body)
+         res.status(200).json("success")
        } catch (error) {
         res.status(500).json({message:error.message})
        }
