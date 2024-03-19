@@ -33,22 +33,7 @@ app.use("/registeradmin",require('./routes/login'));
 app.use("/socials",require('./routes/social'));
 app.use("/faqs",require('./routes/faq'));
 app.use("/test",require('./routes/test'));
-// Login route
-app.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email, password });
 
-    if (user) {
-      res.status(200).json({ message: 'Login successful', user });
-    } else {
-      res.status(400).json({ message: 'Invalid credentials' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
 
 
 app.listen(PORT,()=>{
