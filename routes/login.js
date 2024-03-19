@@ -1,55 +1,58 @@
-const express =require('express');
-const router = express.Router();
-const Admin = require('../models/admin');
-const bcrypt = require('bcryptjs');
+const express = require('express');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET ='Dh$sanatandharmaya';
+const bodyParser = require('body-parser');
+const router = express.Router();
 
-router.post("/",async (req,res)=>{
+const SECRET_KEY = 'Sanatan_secret_key';
+
+
+const AdminSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
+
+const Admin = mongoose.model('Admin', AdminSchema);
+
+// Register route
+router.post('/register', async (req, res) => {
   try {
-    const {email,password} =req.body;
-   
-        return res.status(200).send({
-          token: 'Dharmayasanatan@gmail.com'
-        })}catch(error){
-    res.status(500).send({
-      message: "Error creating user",
-      error,
-    });
+    const { email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newAdmin = new Admin({ email, password: hashedPassword });
+    await newAdmin.save();
+    res.status(201).json({ message: 'Admin registered successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
-})
+});
 
-
-router.post("/register", async (req, res) => {
-  const {email,password} =req.body;
-
+// Login route
+router.post('/login', async (req, res) => {
   try {
-   const salt =await bcrypt.genSalt(10);
-    const secpass = await bcrypt.hash(password,salt);
-    createadmin = await Admin.create({
+    const { email, password } = req.body;
+    const Admin = await Admin.findOne({ email });
 
-      email: email,
-      password:secpass,
-    })
-     const newadmin= createadmin.save();
-     const data={
-      admin :email
-     }
-     const authtoken = jwt.sign(data,JWT_SECRET);
-    res.status(200).json({authtoken});
-    // const data={
-    //  email:req.body.email,
-    //  password:req.body.password 
-    // }
-    // const authtoken = jwt.sign(data,JWT_SECRET)
-    // res.json({authtoken})
+    if (!Admin) {
+      return res.status(404).json({ message: 'Admin not found' });
+    }
 
-  }catch(error){
-    res.status(500).send({
-      message: "Error creating user",
-      error,
-    });
+    const isPasswordValid = await bcrypt.compare(password, Admin.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+
+    const token = jwt.sign({ AdminId: Admin._id }, SECRET_KEY);
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
+});
 
-})
+
+
+
 module.exports = router;

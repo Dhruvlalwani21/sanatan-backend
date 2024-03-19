@@ -3,13 +3,15 @@ const connectToMongo = require('./db');
 const cors = require('cors')
 const app = express(); 
 const bcrypt = require("bcrypt");
+const bodyParser = require('body-parser');
 const PORT = 4000; 
 
 app.use(express.json())
 app.use(cors())
+app.use(bodyParser)
 connectToMongo();
 app.use(express.static('public'));
-app.use('/login', require('./routes/login')); 
+app.use('/auth', require('./routes/login')); 
 app.use('/category/subcategory', require('./routes/category/subcat')); 
 app.use('/category/category', require('./routes/category/category')); 
 app.use('/category/main', require('./routes/category/maincat')); 
